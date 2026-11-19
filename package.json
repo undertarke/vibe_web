@@ -1,0 +1,17 @@
+{
+  "name": "apple-clone",
+  "private": true,
+  "description": "apple.com homepage clone — React (Vite) + Node/Express + MySQL (Docker)",
+  "scripts": {
+    "setup": "npm install && npm --prefix backend install && npm --prefix frontend install",
+    "db:up": "docker compose up -d --wait",
+    "db:down": "docker compose stop",
+    "db:init": "npm --prefix backend run db:init",
+    "dev": "concurrently -n api,web -c blue,magenta \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
+    "start": "npm run db:up && npm run dev",
+    "build": "npm --prefix frontend run build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.5"
+  }
+}

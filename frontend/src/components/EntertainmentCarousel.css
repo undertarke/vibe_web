@@ -1,0 +1,203 @@
+.entertainment {
+  background: #fff;
+  padding: 72px 0 64px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+.entertainment-title {
+  text-align: center;
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 600;
+  margin: 0 0 40px;
+  padding: 0 22px;
+}
+
+/* --- Apple TV carousel ------------------------------------------- */
+.tv-carousel {
+  --slide-w: min(1250px, calc(100vw - 180px));
+  --gap: 12px;
+}
+.tv-viewport { touch-action: pan-y; user-select: none; }
+.tv-track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--gap);
+  /* padding % resolves against the viewport div, so the active slide is centered even with a scrollbar */
+  padding-left: calc((100% - var(--slide-w)) / 2);
+  transform: translateX(calc(-1 * var(--index) * (var(--slide-w) + var(--gap))));
+  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.tv-slide {
+  position: relative;
+  flex: none;
+  width: var(--slide-w);
+  aspect-ratio: 1250 / 668;
+  border-radius: 0;
+  overflow: hidden;
+  background: #1d1d1f;
+  cursor: pointer;
+  transition: opacity 0.6s;
+  opacity: 0.45;
+}
+.tv-slide.is-active { opacity: 1; cursor: default; }
+.tv-slide img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.tv-slide::after {
+  content: '';
+  position: absolute;
+  inset: 55% 0 0 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  pointer-events: none;
+}
+
+.tv-caption {
+  position: absolute;
+  left: 52px;
+  right: 52px;
+  bottom: 44px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s 0.3s, transform 0.5s 0.3s;
+}
+.tv-slide.is-active .tv-caption { opacity: 1; transform: none; }
+.tv-text { margin: 0; font-size: 17px; line-height: 1.47; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4); }
+.tv-genre { font-weight: 600; }
+
+.tv-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+.tv-dots {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  height: 56px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: rgba(210, 210, 215, 0.64);
+  backdrop-filter: blur(7px);
+}
+.tv-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.42);
+  cursor: pointer;
+  overflow: hidden;
+  transition: width 0.4s, background 0.3s;
+}
+.tv-dot:hover { background: rgba(0, 0, 0, 0.6); }
+.tv-dot.is-active { width: 48px; background: rgba(0, 0, 0, 0.42); }
+.tv-dot.is-active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #1d1d1f;
+  border-radius: inherit;
+  transform-origin: left;
+}
+.tv-dot.is-running::after { animation: dotProgress var(--duration) linear forwards; }
+@keyframes dotProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.tv-play {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(210, 210, 215, 0.64);
+  color: #1d1d1f;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.tv-play:hover { background: rgba(223, 223, 227, 0.9); }
+
+/* --- Shelf (Music / Fitness+ / Arcade) ---------------------------- */
+.shelf { max-width: 1250px; margin: 56px auto 0; padding: 0 22px; }
+.shelf-track {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 8px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 3 * 20px) / 4);
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.shelf-track::-webkit-scrollbar { display: none; }
+.shelf-card { scroll-snap-align: start; }
+.shelf-card a { display: block; color: inherit; }
+.shelf-card a:hover { text-decoration: none; }
+.shelf-media {
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f5f5f7;
+}
+.shelf-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.shelf-card a:hover .shelf-media img { transform: scale(1.04); }
+.shelf-service { margin: 14px 0 2px; font-size: 12px; font-weight: 600; color: #6e6e73; text-transform: uppercase; letter-spacing: 0.04em; }
+.shelf-title { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.3; }
+.shelf-cta { display: inline-flex; align-items: center; gap: 4px; margin-top: 6px; font-size: 14px; color: var(--link); }
+.shelf-card a:hover .shelf-cta { text-decoration: underline; }
+
+.shelf-arrows { display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px; }
+.shelf-arrows button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(210, 210, 215, 0.64);
+  color: rgba(0, 0, 0, 0.56);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.shelf-arrows button:hover:not(:disabled) { background: rgba(223, 223, 227, 0.9); color: #1d1d1f; }
+.shelf-arrows button:disabled { opacity: 0.42; cursor: default; }
+
+@media (max-width: 1068px) {
+  .tv-carousel { --slide-w: calc(100vw - 120px); }
+  .shelf-track { grid-auto-columns: calc((100% - 2 * 20px) / 3); }
+  .tv-caption { left: 32px; bottom: 28px; }
+}
+@media (max-width: 734px) {
+  .entertainment { padding: 48px 0; }
+  .entertainment-title { font-size: 28px; margin-bottom: 28px; }
+  .tv-carousel { --slide-w: calc(100vw - 48px); --gap: 8px; }
+  /* Keep the artwork's native ratio (titles are baked into it) and put the caption underneath */
+  .tv-slide { aspect-ratio: auto; background: transparent; }
+  .tv-slide img { height: auto; aspect-ratio: 1250 / 668; border-radius: 12px; }
+  .tv-slide::after { display: none; }
+  .tv-caption {
+    position: static;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 4px 0;
+    color: #1d1d1f;
+  }
+  .tv-caption .button-light { background: #1d1d1f; color: #fff; }
+  .tv-text { font-size: 14px; text-shadow: none; }
+  .tv-dots, .tv-play { height: 44px; }
+  .tv-play { width: 44px; }
+  .tv-dot.is-active { width: 32px; }
+  .shelf { padding: 0 16px; }
+  .shelf-track { grid-auto-columns: 78%; gap: 14px; }
+}
