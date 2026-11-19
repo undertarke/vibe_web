@@ -1,0 +1,125 @@
+.lineup { background: #fff; padding-bottom: 80px; }
+
+.lineup-hero { max-width: 1024px; margin: 0 auto; padding: 72px 22px 28px; }
+.lineup-hero h1 { margin: 0; font-size: 80px; line-height: 1.05; font-weight: 600; letter-spacing: -0.015em; }
+.lineup-hero p { margin: 8px 0 0; font-size: 28px; line-height: 1.14; font-weight: 600; color: var(--text-secondary); }
+
+/* Controls ------------------------------------------------------------ */
+.lineup-controls {
+  max-width: 1024px; margin: 0 auto 32px; padding: 0 22px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.lineup-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.pill {
+  border: 1px solid #d2d2d7; background: #fff; color: var(--text);
+  padding: 7px 16px; border-radius: 999px; font-size: 14px; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.pill:hover { border-color: #86868b; }
+.pill.is-active { background: var(--text); border-color: var(--text); color: #fff; }
+.lineup-sort { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-secondary); }
+.lineup-sort select {
+  font: inherit; font-size: 14px; color: var(--text);
+  border: 1px solid #d2d2d7; border-radius: 10px; padding: 7px 10px; background: #fff;
+}
+
+/* Grid ---------------------------------------------------------------- */
+.lineup-grid {
+  list-style: none; margin: 0 auto; padding: 0 22px; max-width: 1024px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.lineup-empty { text-align: center; color: var(--text-secondary); padding: 48px 22px; }
+
+.card {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  background: var(--bg-light); border-radius: 28px; padding: 32px 24px 28px;
+}
+
+.card-art { height: 260px; width: 100%; display: grid; place-items: center; margin-bottom: 20px; }
+.phone { display: flex; gap: 3px; transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.card:hover .phone { transform: translateY(-6px); }
+.phone-panel {
+  position: relative; display: block;
+  width: 118px; height: 240px; border-radius: 26px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, 0.12)),
+    var(--tint);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 18px 30px -12px rgba(0, 0, 0, 0.35);
+  transition: background-color 0.3s;
+}
+.phone-fold .phone-panel { width: 104px; height: 220px; }
+.phone-fold .phone-panel:first-child { border-radius: 24px 6px 6px 24px; }
+.phone-fold .phone-panel:last-child { border-radius: 6px 24px 24px 6px; }
+.phone-camera {
+  position: absolute; top: 12px; left: 12px; width: 40px; height: 40px; border-radius: 12px;
+  background: rgba(0, 0, 0, 0.14); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+.phone-camera::before, .phone-camera::after {
+  content: ''; position: absolute; width: 14px; height: 14px; border-radius: 50%;
+  background: #1d1d1f; box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+.phone-camera::before { top: 5px; left: 5px; }
+.phone-camera::after { bottom: 5px; right: 5px; }
+
+.card-colors { min-height: 46px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.card-swatches { display: flex; gap: 8px; }
+.card-swatch {
+  width: 16px; height: 16px; padding: 0; border-radius: 50%; cursor: pointer;
+  background: var(--swatch); border: 0;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+  outline-offset: 3px;
+}
+.card-swatch.is-active { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), 0 0 0 2px var(--bg-light), 0 0 0 3px #1d1d1f; }
+.card-color-name { font-size: 12px; color: var(--text-secondary); }
+
+.card-eyebrow { margin: 12px 0 0; font-size: 14px; font-weight: 600; color: #b64400; }
+.card-eyebrow.is-muted { color: var(--text-secondary); }
+.card-name { margin: 4px 0 0; font-size: 32px; line-height: 1.12; font-weight: 600; letter-spacing: -0.01em; }
+.card-tagline { margin: 6px 0 0; font-size: 17px; }
+.card-price { margin: 14px 0 0; font-size: 15px; color: var(--text-secondary); }
+
+.card-ctas { display: flex; align-items: center; justify-content: center; gap: 20px; margin: 20px 0 28px; min-height: 40px; flex-wrap: wrap; }
+.card-ctas .button { font-size: 14px; padding: 8px 16px; }
+.card-link { font-size: 15px; }
+
+.card-specs {
+  width: 100%; margin: auto 0 0; padding-top: 20px; border-top: 1px solid #d2d2d7;
+  display: grid; gap: 14px;
+}
+.card-specs div { display: flex; flex-direction: column; gap: 2px; }
+.card-specs dt { font-size: 12px; color: var(--text-secondary); }
+.card-specs dd { margin: 0; font-size: 15px; font-weight: 600; }
+
+/* Compare ------------------------------------------------------------- */
+.compare { max-width: 1024px; margin: 96px auto 0; padding: 0 22px; }
+.compare h2 { margin: 0 0 24px; font-size: 40px; line-height: 1.1; font-weight: 600; text-align: center; }
+.compare-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.compare table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 15px; }
+.compare th, .compare td { padding: 14px 12px; border-bottom: 1px solid #e8e8ed; text-align: left; vertical-align: top; }
+.compare thead th { font-size: 17px; font-weight: 600; border-bottom: 1px solid #d2d2d7; }
+.compare tbody th { font-size: 13px; font-weight: 400; color: var(--text-secondary); white-space: nowrap; width: 110px; }
+.compare-swatches { display: inline-flex; gap: 5px; flex-wrap: wrap; }
+.compare-swatches span { width: 12px; height: 12px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15); }
+
+/* Responsive ---------------------------------------------------------- */
+@media (max-width: 1068px) {
+  .lineup-hero h1 { font-size: 64px; }
+  .lineup-grid { gap: 16px; }
+  .card-name { font-size: 28px; }
+}
+
+@media (max-width: 834px) {
+  .lineup-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 734px) {
+  .lineup-hero { padding: 48px 16px 20px; }
+  .lineup-hero h1 { font-size: 48px; }
+  .lineup-hero p { font-size: 21px; }
+  .lineup-controls, .lineup-grid, .compare { padding-left: 16px; padding-right: 16px; }
+  .lineup-grid { grid-template-columns: 1fr; }
+  .card-art { height: 220px; }
+  .phone { transform: scale(0.86); }
+  .card:hover .phone { transform: scale(0.86) translateY(-6px); }
+  .compare h2 { font-size: 28px; }
+}

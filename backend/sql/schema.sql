@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS footnotes;
 DROP TABLE IF EXISTS footer_links;
 DROP TABLE IF EXISTS footer_groups;
 DROP TABLE IF EXISTS legal_links;
+DROP TABLE IF EXISTS iphones;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -106,3 +107,23 @@ CREATE TABLE legal_links (
   sort_order  INT          NOT NULL DEFAULT 0
 ) ENGINE=InnoDB;
 
+-- iPhone catalogue managed from /admin/iphones (CRUD: /api/iphones)
+CREATE TABLE iphones (
+  id               INT AUTO_INCREMENT PRIMARY KEY,
+  slug             VARCHAR(64)   NOT NULL UNIQUE,
+  name             VARCHAR(128)  NOT NULL,
+  tagline          VARCHAR(255)  NULL,
+  chip             VARCHAR(64)   NULL,
+  display_inches   DECIMAL(3,1)  NULL,
+  storage_options  JSON          NOT NULL,            -- ["256GB","512GB","1TB"]
+  colors           JSON          NOT NULL,            -- [{"name":"Burgundy","hex":"#6d2c35"}]
+  price_from       DECIMAL(10,2) NOT NULL,            -- USD
+  stock            INT           NOT NULL DEFAULT 0,
+  status           ENUM('available','preorder','coming_soon','discontinued') NOT NULL DEFAULT 'available',
+  release_date     DATE          NULL,
+  image_url        VARCHAR(512)  NULL,
+  product_url      VARCHAR(512)  NULL,
+  sort_order       INT           NOT NULL DEFAULT 0,
+  created_at       TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at       TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;

@@ -16,7 +16,9 @@ The user writes in Vietnamese; reply in Vietnamese. The user has granted full pe
 
 ## Architecture
 - All page content lives in MySQL. `GET /api/home` returns `{ nav, heroes, promos, carousel:{title,tv,shelf}, footer:{footnotes,columns,legal,copyright,moreWaysToShop,locale} }` built in `backend/src/services/content.js`.
-- CRUD only for `sections` (`backend/src/routes/sections.js`, whitelist in `FIELDS` — add new columns there).
+- CRUD for `sections` (`backend/src/routes/sections.js`, whitelist in `FIELDS` — add new columns there).
+- Pages are picked in `main.jsx` by pathname via a `ROUTES` map (no router lib, lazy-loaded): `/iphone` public lineup (`frontend/src/pages/IphoneLineup.jsx`, hides `discontinued`, reuses GlobalNav/Footer from `/api/home`; nav item iPhone → `/iphone`).
+- iPhone admin: `/admin/iphones` (React, `frontend/src/admin/`) ↔ CRUD `/api/iphones` (`backend/src/routes/iphones.js`, validation in `parse()`). Table `iphones`; `storage_options`/`colors` are JSON columns, `release_date` returned as `YYYY-MM-DD` via DATE_FORMAT.
 - Schema changes: edit `schema.sql` + `seed.sql`, then `npm run db:init`. No migration tool.
 - `sections.theme`: light (#f5f5f7) / dark (#000) / gradient (holiday CSS gradient, no image). `image_position`: overlay (image behind copy, default) / below (image under copy; used for the Watch tile, whose art fills the whole frame).
 - Apple image specs: hero art is 3008×580, promo art is 1262×580, rendered `object-fit: cover` and pinned to the bottom. Promo wordmark logos are 49px tall PNGs. TV slides are 1250×668 with the title baked into the art, so there is no logo overlay.

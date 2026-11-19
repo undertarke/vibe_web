@@ -71,6 +71,23 @@ vibe_code/
 | POST   | `/api/sections`       | Tạo mới (bắt buộc `slug`, `type`, `headline`) |
 | PUT    | `/api/sections/:id`   | Cập nhật một phần |
 | DELETE | `/api/sections/:id`   | Xoá |
+| GET    | `/api/iphones`        | Danh mục iPhone (`?q=` tìm theo tên/chip/tagline, `?status=` lọc) |
+| GET    | `/api/iphones/:id`    | Chi tiết 1 mẫu |
+| POST   | `/api/iphones`        | Tạo mới (bắt buộc `name`, `price_from`; `slug` tự tạo nếu trống) |
+| PUT    | `/api/iphones/:id`    | Cập nhật một phần |
+| DELETE | `/api/iphones/:id`    | Xoá |
+
+## Trang iPhone (công khai)
+
+Mở http://localhost:5173/iphone (menu **iPhone** trên trang chủ cũng trỏ về đây) — lưới sản phẩm kiểu apple.com:
+đổi màu máy bằng chấm màu, lọc theo trạng thái, sắp xếp theo giá/mới nhất, bảng so sánh thông số.
+Đọc cùng dữ liệu `GET /api/iphones`; mẫu ở trạng thái *Ngừng bán* bị ẩn. Code: `frontend/src/pages/IphoneLineup.jsx`.
+
+## Trang quản lý iPhone
+
+Mở http://localhost:5173/admin/iphones — thêm / sửa / xoá mẫu iPhone, tìm kiếm, lọc theo trạng thái,
+thống kê tồn kho (cảnh báo khi < 20). Dữ liệu nằm ở bảng `iphones` (`storage_options`, `colors` là cột JSON).
+Code: `frontend/src/admin/`, `backend/src/routes/iphones.js`.
 
 Ví dụ thêm 1 tile mới:
 
@@ -88,6 +105,7 @@ curl -X POST localhost:4000/api/sections -H 'content-type: application/json' \
 | `nav_items`        | 11 mục menu trên cùng |
 | `nav_flyout_links` | link trong flyout (group_title, is_primary = chữ lớn) |
 | `sections`         | hero (`type=hero`) & promo tile (`type=promo`); `theme` light/dark/gradient; `image_position` overlay/below |
+| `iphones`          | danh mục iPhone cho trang `/admin/iphones` (giá, chip, dung lượng, màu, tồn kho, trạng thái) |
 | `carousel_items`   | `group_name=tv` (slide lớn Apple TV) / `shelf` (Music, Fitness+, Arcade) |
 | `footnotes`        | chú thích cuối trang (`number` NULL = không đánh số) |
 | `footer_groups` / `footer_links` | directory footer, `column_index` 1–5 |

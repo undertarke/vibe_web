@@ -6,7 +6,7 @@ INSERT INTO nav_items (id, label, url, sort_order) VALUES
 (1,  'Store',         'https://www.apple.com/us/shop/goto/store', 1),
 (2,  'Mac',           'https://www.apple.com/mac/', 2),
 (3,  'iPad',          'https://www.apple.com/ipad/', 3),
-(4,  'iPhone',        'https://www.apple.com/iphone/', 4),
+(4,  'iPhone',        '/iphone', 4),
 (5,  'Watch',         'https://www.apple.com/watch/', 5),
 (6,  'Vision',        'https://www.apple.com/apple-vision-pro/', 6),
 (7,  'AirPods',       'https://www.apple.com/airpods/', 7),
@@ -56,7 +56,7 @@ INSERT INTO nav_flyout_links (nav_item_id, group_title, label, url, is_primary, 
 (3, 'More from iPad', 'iPad Support', 'https://support.apple.com/ipad', 0, 1),
 (3, 'More from iPad', 'iPadOS', 'https://www.apple.com/os/ipados/', 0, 2),
 -- iPhone
-(4, 'Explore iPhone', 'Explore All iPhone', 'https://www.apple.com/iphone/', 1, 1),
+(4, 'Explore iPhone', 'Explore All iPhone', '/iphone', 1, 1),
 (4, 'Explore iPhone', 'iPhone Duo', 'https://www.apple.com/iphone-duo/', 1, 2),
 (4, 'Explore iPhone', 'iPhone 18 Pro', 'https://www.apple.com/iphone-18-pro/', 1, 3),
 (4, 'Explore iPhone', 'iPhone 18', 'https://www.apple.com/iphone/', 1, 4),
@@ -127,7 +127,7 @@ INSERT INTO sections
  'Shop gifts', 'https://www.apple.com/us/shop/goto/store', NULL, NULL, 1),
 
 ('iphone-duo', 'hero', 'light', NULL,
- 'iPhone Duo', 'Hello, hello.', NULL,
+ 'iPhone Duo', 'Hello, iphone', NULL,
  'https://www.apple.com/v/homepage/images/iphone-duo/a/hero_iphone_duo_animated__ggqp9olf1ii6_large.jpg',
  'iPhone Duo, held by two hands in landscape orientation, unfolded, interior display features Home Screen.',
  'Learn more', 'https://www.apple.com/iphone-duo/', 'Buy', 'https://www.apple.com/us/shop/goto/buy_iphone/iphone_duo', 2),
@@ -342,3 +342,35 @@ INSERT INTO legal_links (label, url, sort_order) VALUES
 
 -- Watch art fills the whole tile, so render it below the copy instead of behind it
 UPDATE sections SET image_position = 'below' WHERE slug = 'apple-watch-series-12';
+
+-- ---------------------------------------------------------------- IPHONE CATALOGUE (sample data for /admin/iphones)
+INSERT INTO iphones
+  (slug, name, tagline, chip, display_inches, storage_options, colors, price_from, stock, status, release_date, image_url, product_url, sort_order) VALUES
+('iphone-duo', 'iPhone Duo', 'Hello, iphone', 'A20 Pro', 7.8,
+ '["256GB","512GB","1TB"]',
+ '[{"name":"Silver","hex":"#e3e4e5"},{"name":"Space Black","hex":"#2e2c2e"}]',
+ 1999.00, 35, 'preorder', '2026-11-14',
+ 'https://www.apple.com/v/homepage/images/iphone-duo/a/hero_iphone_duo_animated__ggqp9olf1ii6_large.jpg',
+ 'https://www.apple.com/iphone-duo/', 1),
+('iphone-18-pro-max', 'iPhone 18 Pro Max', 'Pro further.', 'A20 Pro', 6.9,
+ '["256GB","512GB","1TB","2TB"]',
+ '[{"name":"Burgundy","hex":"#6d2c35"},{"name":"Deep Blue","hex":"#3b4a63"},{"name":"Silver","hex":"#e3e4e5"}]',
+ 1199.00, 140, 'available', '2026-09-18',
+ 'https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro__fqe1motd0ymy_large.jpg',
+ 'https://www.apple.com/iphone-18-pro/', 2),
+('iphone-18-pro', 'iPhone 18 Pro', 'Pro further.', 'A20 Pro', 6.3,
+ '["256GB","512GB","1TB"]',
+ '[{"name":"Burgundy","hex":"#6d2c35"},{"name":"Deep Blue","hex":"#3b4a63"},{"name":"Silver","hex":"#e3e4e5"}]',
+ 1099.00, 210, 'available', '2026-09-18',
+ 'https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro__fqe1motd0ymy_large.jpg',
+ 'https://www.apple.com/iphone-18-pro/', 3),
+('iphone-18', 'iPhone 18', 'Bright and colourful.', 'A20', 6.3,
+ '["256GB","512GB"]',
+ '[{"name":"Sky Blue","hex":"#a9c6e0"},{"name":"Lavender","hex":"#c9bfe0"},{"name":"White","hex":"#f2f2f2"},{"name":"Black","hex":"#1f1f21"}]',
+ 799.00, 12, 'available', '2026-09-18', NULL,
+ 'https://www.apple.com/iphone/', 4),
+('iphone-18e', 'iPhone 18e', 'Everything you need.', 'A20', 6.1,
+ '["128GB","256GB"]',
+ '[{"name":"White","hex":"#f2f2f2"},{"name":"Black","hex":"#1f1f21"}]',
+ 599.00, 0, 'coming_soon', '2027-02-27', NULL,
+ 'https://www.apple.com/iphone/', 5);
